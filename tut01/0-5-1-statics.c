@@ -2,8 +2,6 @@
  * Variable declarations and definitions and initialisation
  */
 
-#include <stdlib.h>
-
 double addWithBonus(double a, double b);
 static double minus(double a, double b);
 

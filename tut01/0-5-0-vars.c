@@ -2,14 +2,11 @@
  * Variable declarations and definitions and initialisation
  */
 
-#include <stdlib.h>
-
 double add(double a, double b);
 
+// Global var in uninitialised segment
 int globalVar1;
 int globalVar2 = 83;
-
-static int globalVarStatic = 91;
 
 int main() {
     int localVar1;
