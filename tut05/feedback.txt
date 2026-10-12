@@ -1,0 +1,25 @@
+Use a consistent variable naming style
+for variable and function names eg. camelCase OR snake_case 
+
+Helper functions should be defined directly underneath the function
+in which it is used.
+
+Helper functions should be declared static and have a function
+prototype at the top of the file.
+
+Ideally use INT_MAX from <limits.h>
+
+Create a function comment for each
+helper function to state briefly what the function does.
+
+Please include a function comment at the top of each helper function, to briefly state what the function does / why it exists.
+
+Some comments here and other places to explain complex code
+would be appreciated.
+
+Use helper functions to make your code short and readable.
+
+All structs should be defined near the top of the file, before the
+function prototypes and function definitions.
+
+Unnecessary type casts when using malloc
