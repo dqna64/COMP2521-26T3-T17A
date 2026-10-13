@@ -7,19 +7,11 @@ struct node {
     struct node *next;
 };
 
-void littleHelper();
 struct node *appendToList(struct node *node, int data);
+void printList(struct node *node);
 struct node *myFunc(struct node *head, int data);
 void freeList(struct node *head);
-
-void printList(struct node *node) {
-    while (node->next != NULL) {
-        printf("%d -> ", node->data);
-        node = node->next;
-    }
-    printf("%d\n", node->data);
-    return;
-}
+struct node *createNode(int data);
 
 int main() {
     struct node *head = NULL;
@@ -37,14 +29,8 @@ int main() {
  * Appends a new node to the linked list
  */
 struct node *appendToList(struct node *node, int data) {
-    // malloc the node
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
-    if (newNode == NULL) {
-        fprintf(stderr, "Unable to malloc new node\n");
-        exit(EXIT_FAILURE);
-    }
-    newNode->data = data;
-    newNode->next = NULL;
+    struct node *newNode = createNode(data);
+
     if (node == NULL) {
         node = newNode;
     } else {
@@ -59,18 +45,37 @@ struct node *appendToList(struct node *node, int data) {
     return node;
 }
 
+struct node *createNode(int data) {
+    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    if (newNode == NULL) {
+        fprintf(stderr, "Unable to malloc new node\n");
+        exit(EXIT_FAILURE);
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+/**
+ * Prints a linked list in format:
+ * "1 -> 2 -> 3"
+ */
+void printList(struct node *node) {
+    while (node->next != NULL) {
+        printf("%d -> ", node->data);
+        node = node->next;
+    }
+    printf("%d\n", node->data);
+    return;
+}
+
 /**
  * Prepends a new node to the linked list
  */
 struct node *myFunc(struct node *head, int data) {
-    struct node *x = (struct node *)malloc(sizeof(struct node));
-    if (x == NULL) {
-        fprintf(stderr, "Unable to malloc new node\n");
-        exit(EXIT_FAILURE);
-    }
-    x->data = data;
-    x->next = head;
-    return x;
+    struct node *newNode = createNode(data);
+    newNode->next = head;
+    return newNode;
 }
 
 /**
@@ -95,4 +100,4 @@ void freeList(struct node *head) {
 /**
  * creates a variable
  */
-static void littleHelper() { int fdsjakfl = 3242; }
+void littleHelper() { int fdsjakfl = 3242; }

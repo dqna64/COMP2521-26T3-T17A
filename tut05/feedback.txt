@@ -9,19 +9,20 @@ underneath the first function that it's used in.
 Helper functions should be declared static and have a function
 prototype at the top of the file.
 
+Use descriptive variable names.
+
 Ideally use INT_MAX from <limits.h>
 
 Create a function comment for each
 helper function to state briefly what the function does.
 
-Please include a function comment at the top of each helper function, to briefly state what the function does / why it exists.
+Write a function comment at the top of each helper function, to briefly state what the function does / why it exists.
 
-Some comments here and other places to explain complex code
-would be appreciated.
+Write comments to explain complex or non-obvious logic.
 
 Use helper functions to make your code short and readable.
 
 All structs should be defined near the top of the file, before the
 function prototypes and function definitions.
 
-Unnecessary type casts when using malloc
+Don't use unnecessary type casts when using malloc

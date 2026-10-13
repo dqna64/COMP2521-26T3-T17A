@@ -8,10 +8,10 @@ struct node {
 };
 
 struct node *appendToList(struct node *head, int data);
-struct node *prependToList(struct node *head, int data);
-static struct node *createNode(int data);
 void printList(struct node *head);
+struct node *prependToList(struct node *head, int data);
 void freeList(struct node *head);
+static struct node *createNode(int data);
 
 int main(void) {
     struct node *head = NULL;
@@ -45,16 +45,6 @@ struct node *appendToList(struct node *head, int data) {
 }
 
 /**
- * Prepends a new node containing the given data to the start of the list,
- * and returns the new head of the list
- */
-struct node *prependToList(struct node *head, int data) {
-    struct node *newNode = createNode(data);
-    newNode->next = head;
-    return newNode;
-}
-
-/**
  * Creates a new node containing the given data, exiting if malloc fails
  */
 static struct node *createNode(int data) {
@@ -78,6 +68,16 @@ void printList(struct node *head) {
         curr = curr->next;
     }
     printf("%d\n", curr->data);
+}
+
+/**
+ * Prepends a new node containing the given data to the start of the list,
+ * and returns the new head of the list
+ */
+struct node *prependToList(struct node *head, int data) {
+    struct node *newNode = createNode(data);
+    newNode->next = head;
+    return newNode;
 }
 
 /**
