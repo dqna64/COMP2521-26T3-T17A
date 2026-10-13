@@ -3,6 +3,8 @@ for variable and function names eg. camelCase OR snake_case
 
 Helper functions should be defined directly underneath the function
 in which it is used.
+If it is used in multiple functions, then it should be defined
+underneath the first function that it's used in.
 
 Helper functions should be declared static and have a function
 prototype at the top of the file.

@@ -1,86 +1,92 @@
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 struct node {
-  int fjsdajfkldsajf;
-  struct node *next;
+    int data;
+    struct node *next;
 };
 
-struct node *appendNewNodeToList(struct node *listHead, int data);
-struct node *createNode(int data);
-void printList(struct node *node);
+struct node *appendToList(struct node *head, int data);
+struct node *prependToList(struct node *head, int data);
+static struct node *createNode(int data);
+void printList(struct node *head);
 void freeList(struct node *head);
 
-int main() {
-  struct node *head = NULL;
-  head = appendNewNodeToList(head, 1);
-  head = appendNewNodeToList(head, 2);
-  head = appendNewNodeToList(head, 3);
-  head = appendNewNodeToList(head, 4);
-
-  printList(head);
-  freeList(head);
-
-  return 0;
+int main(void) {
+    struct node *head = NULL;
+    head = appendToList(head, 1);
+    head = appendToList(head, 2);
+    head = appendToList(head, 3);
+    head = appendToList(head, INT_MAX);
+    head = prependToList(head, 0);
+    printList(head);
+    freeList(head);
+    return 0;
 }
 
 /**
- * Adds a node to the end of linked list
+ * Appends a new node containing the given data to the end of the list,
+ * and returns the head of the list
  */
-struct node *appendNewNodeToList(struct node *listHead, int data) {
-  struct node *newNode = createNode(data);
+struct node *appendToList(struct node *head, int data) {
+    struct node *newNode = createNode(data);
+    if (head == NULL) {
+        return newNode;
+    }
 
-  if (listHead == NULL) {
-    listHead = newNode;
-  } else {
-    // Find the last node of the linked list
-    struct node *lastNode = listHead;
+    // Find the last node of the list
+    struct node *lastNode = head;
     while (lastNode->next != NULL) {
-      lastNode = lastNode->next;
+        lastNode = lastNode->next;
     }
     lastNode->next = newNode;
-  }
-
-  return listHead;
+    return head;
 }
 
 /**
- * Create a new linked list node
+ * Prepends a new node containing the given data to the start of the list,
+ * and returns the new head of the list
  */
-struct node *createNode(int data) {
-  struct node *newNode = malloc(sizeof(struct node));
-  newNode->fjsdajfkldsajf = data;
-  newNode->next = NULL;
-  return newNode;
+struct node *prependToList(struct node *head, int data) {
+    struct node *newNode = createNode(data);
+    newNode->next = head;
+    return newNode;
 }
 
 /**
- * Given a linked list, prints each node in order
- * E.g 1 -> 2 -> 3 ->
+ * Creates a new node containing the given data, exiting if malloc fails
  */
-void printList(struct node *node) {
-  while (node->next != NULL) {
-    printf("%d -> ", node->fjsdajfkldsajf);
-    node = node->next;
-  }
-
-  printf("%d\n", node->fjsdajfkldsajf);
-  return;
+static struct node *createNode(int data) {
+    struct node *newNode = malloc(sizeof(struct node));
+    if (newNode == NULL) {
+        fprintf(stderr, "Unable to malloc new node\n");
+        exit(EXIT_FAILURE);
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
 }
 
 /**
- * Given a linked list, frees each node
+ * Prints each node in the list in order, e.g. 1 -> 2 -> 3
+ */
+void printList(struct node *head) {
+    struct node *curr = head;
+    while (curr->next != NULL) {
+        printf("%d -> ", curr->data);
+        curr = curr->next;
+    }
+    printf("%d\n", curr->data);
+}
+
+/**
+ * Frees every node in the list
  */
 void freeList(struct node *head) {
-  if (head == NULL) {
-    return;
-  }
-  struct node *temp = head;
-
-  // loop through to free each node
-  while (head != NULL) {
-    temp = head;
-    head = head->next;
-    free(temp);
-  }
+    while (head != NULL) {
+        struct node *temp = head;
+        head = head->next;
+        free(temp);
+    }
 }
