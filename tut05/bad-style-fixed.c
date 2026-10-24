@@ -8,10 +8,10 @@ struct node {
 };
 
 struct node *appendToList(struct node *head, int data);
+static struct node *createNode(int data);
 void printList(struct node *head);
 struct node *prependToList(struct node *head, int data);
 void freeList(struct node *head);
-static struct node *createNode(int data);
 
 int main(void) {
     struct node *head = NULL;
